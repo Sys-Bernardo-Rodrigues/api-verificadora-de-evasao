@@ -1,0 +1,4 @@
+venvAPI/
+__pycache__/
+*.pyc
+*.joblib

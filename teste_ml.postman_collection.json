@@ -1,0 +1,234 @@
+{
+	"info": {
+		"_postman_id": "958d636d-61bd-42fc-932d-1d7dc2f9b907",
+		"name": "teste_ml",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26714636"
+	},
+	"item": [
+		{
+			"name": "create_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\":\"felipezeiser2\",\n    \"password\": \"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1/user",
+					"protocol": "http",
+					"host": [
+						"34",
+						"95",
+						"148",
+						"193"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "teste",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/unprotected",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"unprotected"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "felipezeiser",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "12345",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNfaWQiOiIwZTMzMDEyOS05NmIyLTRiNjMtODYyOS0xYWNlZjZjMTA1M2IiLCJleHAiOjE2OTk2MjQ4Mjd9.WT1Y_GrWM2fNkDEZXr-kdziXOFsy-8kvSdYI1iS-Hsc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/0e330129-96b2-4b63-8629-1acef6c1053b",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"0e330129-96b2-4b63-8629-1acef6c1053b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "predict",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNfaWQiOiI4YzNkMjcxZS04MGM0LTRiNmMtYTMxMi1hMmIyZjc3MGIwM2EiLCJleHAiOjE2OTk3Mzg5MTF9.LE0w3ALXstV55seqiPZ62Yl08cxz71dWHSov6emhBH0",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"estado_civil\": \"1\",\n \"tipo_ingresso\": \"8\",\n \"ordem_aplicacao\": \"5\",\n \"curso\": \"12\",\n \"turno\": \"1\",\n \"curso_previo\": \"1\",\n \"nacionalidade\": \"1\",\n \"qualificacao_mae\": \"23\",\n \"qualificacao_pai\": \"1\",\n \"ocupacao_mae\": \"10\",\n \"ocupacao_pai\": \"8\",\n \"vulneravel_nacional\": \"1\",\n \"pcd\": \"0\",\n \"inadimplente\": \"0\",\n \"mensalidade_em_dia\": \"1\",\n \"genero\": \"0\",\n \"bolsista\": \"1\",\n \"idade_matricula\": \"18\",\n \"intercambio\": \"0\",\n \"1sem_creditos_creditados\": \"0\",\n \"1sem_creditos_matriculados\": \"7\",\n \"1sem_creditos_avaliados\": \"8\",\n \"1sem_creditos_aprovados\": \"7\",\n \"1sem_creditos_sem_avaliacao\": \"0\",\n \"2sem_creditos_creditados\": \"0\",\n \"2sem_creditos_matriculados\": \"8\",\n \"2sem_creditos_avaliados\": \"9\",\n \"2sem_creditos_aprovados\": \"8\",\n \"2sem_creditos_sem_avaliacao\": \"0\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://35.198.14.171/predict",
+					"protocol": "http",
+					"host": [
+						"35",
+						"198",
+						"14",
+						"171"
+					],
+					"path": [
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login_v2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\":\"felipezeiser2\",\n    \"password\": \"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

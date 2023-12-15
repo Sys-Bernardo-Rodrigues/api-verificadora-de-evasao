@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '#dark-mode-toggle', function () {
+                $('body').toggleClass('dark-mode');
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#prediction-form').on('submit', function(e) {
+                e.preventDefault();
+
+                var data = {
+                    "estado_civil": $("#estado_civil").val(),
+                    "tipo_ingresso": $("#tipo_ingresso").val(),
+                    "ordem_aplicacao": $("#ordem_aplicacao").val(),
+                    "curso": $("#curso").val(),
+                    "turno": $("#turno").val(),
+                    "curso_previo": $("#curso_previo").val(),
+                    "nacionalidade": $("#nacionalidade").val(),
+                    "qualificacao_mae": $("#qualificacao_mae").val(),
+                    "qualificacao_pai": $("#qualificacao_pai").val(),
+                    "ocupacao_mae": $("#ocupacao_mae").val(),
+                    "ocupacao_pai": $("#ocupacao_pai").val(),
+                    "vulneravel_nacional": $("#vulneravel_nacional").val(),
+                    "pcd": $("#pcd").val(),
+                    "inadimplente": $("#inadimplente").val(),
+                    "mensalidade_em_dia": $("#mensalidade_em_dia").val(),
+                    "genero": $("#genero").val(),
+                    "bolsista": $("#bolsista").val(),
+                    "idade_matricula": $("#idade_matricula").val(),
+                    "intercambio": $("#intercambio").val(),
+                    "1sem_creditos_creditados": $("#1sem_creditos_creditados").val(),
+                    "1sem_creditos_matriculados": $("#1sem_creditos_matriculados").val(),
+                    "1sem_creditos_avaliados": $("#1sem_creditos_avaliados").val(),
+                    "1sem_creditos_aprovados": $("#1sem_creditos_aprovados").val(),
+                    "1sem_creditos_sem_avaliacao": $("#1sem_creditos_sem_avaliacao").val(),
+                    "2sem_creditos_creditados": $("#2sem_creditos_creditados").val(),
+                    "2sem_creditos_matriculados": $("#2sem_creditos_matriculados").val(),
+                    "2sem_creditos_avaliados": $("#2sem_creditos_avaliados").val(),
+                    "2sem_creditos_aprovados": $("#2sem_creditos_aprovados").val(),
+                    "2sem_creditos_sem_avaliacao": $("#2sem_creditos_sem_avaliacao").val()
+                };
+
+                $.ajax({
+                    url: '/predict',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function(response){
+                        var predictionText = '';
+                        var predictionColor = '';
+                        if(response.prediction == '1'){
+                            predictionText = 'O estudante não irá evadir.';
+                            predictionColor = 'success';
+                        } else if(response.prediction == '0'){
+                            predictionText = 'O estudante irá evadir.';
+                            predictionColor = 'error';
+                        }
+                        Swal.fire({
+                            title: 'Previsão',
+                            text: predictionText,
+                            icon: predictionColor
+                        });
+                    },
+                    error: function(error){
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    <div class="dropdown">
+        <button class="dropbtn">Menu</button>
+        <div class="dropdown-content">
+            <a id="dark-mode-toggle">Modo Escuro</a>
+            <a id="logout-button" onclick="location.href='/logout'">Logout</a>
+        </div>
+    </div>
+    <div class="dashboard-container">
+        <h1>Verificador de Evasão</h1>
+        <form id="prediction-form">
+            <input type="text" id="estado_civil" placeholder="Estado Civil">
+            <input type="text" id="tipo_ingresso" placeholder="Tipo de Ingresso">
+            <input type="text" id="ordem_aplicacao" placeholder="Ordem de Aplicação">
+            <input type="text" id="curso" placeholder="Curso">
+            <input type="text" id="turno" placeholder="Turno">
+            <input type="text" id="curso_previo" placeholder="Curso Prévio">
+            <input type="text" id="nacionalidade" placeholder="Nacionalidade">
+            <input type="text" id="qualificacao_mae" placeholder="Qualificação da Mãe">
+            <input type="text" id="qualificacao_pai" placeholder="Qualificação do Pai">
+            <input type="text" id="ocupacao_mae" placeholder="Ocupação da Mãe">
+            <input type="text" id="ocupacao_pai" placeholder="Ocupação do Pai">
+            <input type="text" id="vulneravel_nacional" placeholder="Vulnerável Nacional">
+            <input type="text" id="pcd" placeholder="PCD">
+            <input type="text" id="inadimplente" placeholder="Inadimplente">
+            <input type="text" id="mensalidade_em_dia" placeholder="Mensalidade em Dia">
+            <input type="text" id="genero" placeholder="Gênero">
+            <input type="text" id="bolsista" placeholder="Bolsista">
+            <input type="text" id="idade_matricula" placeholder="Idade na Matrícula">
+            <input type="text" id="intercambio" placeholder="Intercâmbio">
+            <input type="text" id="1sem_creditos_creditados" placeholder="Créditos Creditados no 1º Semestre">
+            <input type="text" id="1sem_creditos_matriculados" placeholder="Créditos Matriculados no 1º Semestre">
+            <input type="text" id="1sem_creditos_avaliados" placeholder="Créditos Avaliados no 1º Semestre">
+            <input type="text" id="1sem_creditos_aprovados" placeholder="Créditos Aprovados no 1º Semestre">
+            <input type="text" id="1sem_creditos_sem_avaliacao" placeholder="Créditos sem Avaliação no 1º Semestre">
+            <input type="text" id="2sem_creditos_creditados" placeholder="Créditos Creditados no 2º Semestre">
+            <input type="text" id="2sem_creditos_matriculados" placeholder="Créditos Matriculados no 2º Semestre">
+            <input type="text" id="2sem_creditos_avaliados" placeholder="Créditos Avaliados no 2º Semestre">
+            <input type="text" id="2sem_creditos_aprovados" placeholder="Créditos Aprovados no 2º Semestre">
+            <input type="text" id="2sem_creditos_sem_avaliacao" placeholder="Créditos sem Avaliação no 2º Semestre">
+            <input type="submit" value="Enviar">
+        </form>
+        <div id="prediction"></div>
+    </div>
+</body>
+
+</html>
